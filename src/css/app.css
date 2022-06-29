@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cadastro {
+  padding: 40px;
+  width: 50vw;
+  height: 470px;
+}
+.login {
+  z-index: 50;
+}
+.sub_menu {
+  height: 100vh ;
+  width: 20vw;
+}
+header li {
+  position: relative;
+  top: 50px;
+}
+
+.sbmt_btn {
+  position: relative;
+  top: 50px;
+  height: 2.25rem;
+  width: 5rem;
+  font-size: 0.9rem;
+}
+
+.header input {
+  font-size: 0.875rem;
+  line-height: 1.3125rem;
+  position: relative;
+  width: 30vw;
+  top: 50px;
+  height: 2.25rem;
+  padding: 12px 16px;
+  background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+  color: rgb(66, 70, 77);
+  z-index: 1;
+}
+
+.form input {
+  width: 40vw;
+  top: 17px;
+  border-top-left-radius: 60px;
+  border-bottom-left-radius: 60px;
+}
+
+.botao_pesquisa {
+  border-top-right-radius: 60px;
+  border-bottom-right-radius: 60px
+}
+
+.produtos {
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 9vh 10vh 2vh;
+
+}
+
+.filtro {
+  background-color: aliceblue;
+  width: 300px;
+  height: 500px;
+  
+}
+
+.sort {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+.sort_search select {
+  height: 35px;
+  border-radius: 5%;
+}
+.p{
+  position: relative;
+  background-color: white;
+  height: fit-content;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.form_search input {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  padding-left: 35px;
+  outline: none;
+}
+
+.form_search button {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  width: 65px;
+}
+
+.count {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+
+input:-webkit-autofill {
+  border: 3px solid blue;
+  background-color: aqua;
+  color: gold;
+}
