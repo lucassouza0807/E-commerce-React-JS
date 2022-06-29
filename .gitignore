@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-./src/components/Test.js
+/src/components/Test.js
 
 # production
 /build
