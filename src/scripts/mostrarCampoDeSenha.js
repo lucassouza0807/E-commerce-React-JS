@@ -15,7 +15,7 @@ function mostrarCampoDeSenha() {
             break;
 
         case undefined:
-            console.log("Vai tomar no cu javascript");
+            console.log("?");
             break;
     }
 

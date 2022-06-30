@@ -25,6 +25,14 @@ function Produtos() {
     "Preço decrescente",
     "Fabricante",
   ];
+  
+  const [p, setP] = useState();
+  
+  produtos.sort();
+  
+  const url = new URL("http://localhost:3000/hardware/produtos");
+
+  console.log(window.location.append);
 
   useEffect(() => {
     instance
@@ -38,10 +46,9 @@ function Produtos() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
-  console.log(produtos);
-
+  }, [instance]);
+  
+  
   return (
     <div className="produtos container">
       <div className="filtro flex flex-col items-center justify-left rounded">
@@ -61,9 +68,9 @@ function Produtos() {
       <div className="sort flex flex-row items-center justify-right p-[1rem]">
         <div className="flex flex-row">
           <h3 className="font-bold mr-[10px]"> Ordenar </h3>
-          <select>
+          <select id="option" >
             {sort.map((option, key) => (
-              <option key={option} value={option}>
+              <option onClick={() => { url.searchParams.append("sort", option) }} key={option} value={option}>
                 {option}
               </option>
             ))}
@@ -78,7 +85,7 @@ function Produtos() {
             key={key}
           >
             <div className="flex items-center justify-center">
-              <img className="h-[9rem]" src={"../" + produto.imagem_path} />
+              <img className="h-[9rem]" src={produto.imagem_path} />
             </div>
             <div className="text-center">
               <h1 className="font-bold"> {produto.produto_nome} </h1>
