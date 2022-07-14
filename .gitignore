@@ -20,6 +20,8 @@
 .env.test.local
 .env.production.local
 ./.env
+.env.REACT_APP
+.env
 
 npm-debug.log*
 yarn-debug.log*
