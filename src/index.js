@@ -21,25 +21,24 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function App() {
   return (
-    <BrowserRouter>
-      <Provider store={store} >
+    <Provider store={store} >
+      <BrowserRouter>
         <PersistGate loading={null} persistor={persirtor}>
           <Header />
-          <ProtectedRoute />
           <Routes>
-            <Route element={<ProtectedRoute />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Route>
-            <Route element={<ProtectLoginPage />}>
-              <Route path="/login" element={<Login />} exact />
-            </Route>
             <Route exact path="/" element={<Body />} />
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/hardware/produtos" element={<Produtos />} />
+            <Route element={<ProtectLoginPage />}>
+              <Route path="/login" element={<Login />} exact />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
           </Routes>
         </PersistGate>
-      </Provider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   )
 }
 

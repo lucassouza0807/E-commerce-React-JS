@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { changeUser } from '../reducers/login/userSlice';
 import { baseURL, timeout, headers } from "../api/api_config.js";
@@ -8,7 +8,6 @@ function Login() {
     const axios = require("axios").default;
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
 
     const instance = axios.create({
         "baseURL": baseURL,
@@ -67,14 +66,11 @@ function Login() {
                         }, []);
                         break;
                 }
-            
 
             })
             .catch((error) => {
                 console.log(error);
-                setValidationMessage({ "mensagem": error.data.mensagem });
-                
-                console.log(error);
+                setValidationMessage({ "mensagem": error.response.data.mensagem });
             }, [])
     }
 

@@ -12,8 +12,8 @@ function ProtectedRoute() {
     let isLogged = state.isLogged;
 
     useEffect(() => {
-        if (isLogged === false) {
-            return navigate("../login", { replace: true })
+        if (isLogged == false) {
+            navigate("../login", { replace: true })
         }
     }, [isLogged])
 

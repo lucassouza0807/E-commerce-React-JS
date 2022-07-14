@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Route, Routes, Link, BrowserRouter } from "react-router-dom";
+import { baseURL, timeout, headers } from "../api/api_config.js";
 
 function Produtos() {
   const axios = require("axios").default;
@@ -7,15 +7,10 @@ function Produtos() {
   const [produtos, setProdutos] = useState(JSON.parse(window.localStorage.getItem("produtos")));
 
   const instance = axios.create({
-    baseURL: "http://127.0.0.1:8000",
-    timeout: 3000,
-    headers: {
-      "API_SECRET": "4f3c6a0b-522e-442e-94f7-3d413956050e",
-      "Access-Control-Allow-Origin": "http://localhost:8000",
-      "Access-Control-Allow-Methods": "PUT, POST, DELETE, GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Accept, Authorization, Content-Type",
-    },
-  });
+    "baseURL": baseURL,
+    "timeout": timeout,
+    "headers": headers
+  })
 
   const sort = [
     "Selecione",
@@ -23,7 +18,7 @@ function Produtos() {
     "Preço decrescente",
     "Fabricante",
   ];
-
+  
   useEffect(() => {
     instance
       .get("/api/produtos")
@@ -35,7 +30,7 @@ function Produtos() {
         console.log(error);
       });
   }, []);
-  
+
   return (
     <div className="produtos container">
       <div className="filtro flex flex-col items-center justify-left rounded">
