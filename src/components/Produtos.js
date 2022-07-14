@@ -4,15 +4,13 @@ import { Route, Routes, Link, BrowserRouter } from "react-router-dom";
 function Produtos() {
   const axios = require("axios").default;
 
-  const [produtos, setProdutos] = useState(
-    JSON.parse(window.localStorage.getItem("produtos"))
-  );
+  const [produtos, setProdutos] = useState(JSON.parse(window.localStorage.getItem("produtos")));
 
-  //Mover este trecho de código para um arquivo separado!
   const instance = axios.create({
     baseURL: "http://127.0.0.1:8000",
     timeout: 3000,
     headers: {
+      "API_SECRET": "4f3c6a0b-522e-442e-94f7-3d413956050e",
       "Access-Control-Allow-Origin": "http://localhost:8000",
       "Access-Control-Allow-Methods": "PUT, POST, DELETE, GET, OPTIONS",
       "Access-Control-Allow-Headers": "Accept, Authorization, Content-Type",
@@ -25,29 +23,18 @@ function Produtos() {
     "Preço decrescente",
     "Fabricante",
   ];
-  
-  const [p, setP] = useState();
-  
-  produtos.sort();
-  
-  const url = new URL("http://localhost:3000/hardware/produtos");
-
-  console.log(window.location.append);
 
   useEffect(() => {
     instance
       .get("/api/produtos")
       .then((response) => {
-        window.localStorage.setItem(
-          "produtos",
-          JSON.stringify(response.data.data)
-        );
+        window.localStorage.setItem("produtos", JSON.stringify(response.data.data));
+        console.log(response.data.data)
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [instance]);
-  
+  }, []);
   
   return (
     <div className="produtos container">
@@ -59,7 +46,7 @@ function Produtos() {
             {produtos.map((produto, key) => (
               <div key={key} className="flex flex-row items-center justify-right p-2">
                 <input type="checkbox" className="filter h-[35px] bg-green mr-[0.8rem]" />
-                <p className=""> {produto.categoria} </p>   
+                <p className=""> {produto.categoria} </p>
               </div>
             ))}
           </form>
@@ -70,7 +57,7 @@ function Produtos() {
           <h3 className="font-bold mr-[10px]"> Ordenar </h3>
           <select id="option" >
             {sort.map((option, key) => (
-              <option onClick={() => { url.searchParams.append("sort", option) }} key={option} value={option}>
+              <option key={option} value={option}>
                 {option}
               </option>
             ))}
@@ -80,10 +67,7 @@ function Produtos() {
       </div>
       <div className="p relative flex flex-row p-[10px] flex-wrap-reverse">
         {produtos.map((produto, key) => (
-          <span
-            className="w-[20%] m-[5px] h-[400px] rounded pb-[15px] border-2 border-gray-100 shadow-lg"
-            key={key}
-          >
+          <span className="w-[20%] m-[5px] h-[400px] rounded pb-[15px] border-2 border-gray-100 shadow-lg" key={key}>
             <div className="flex items-center justify-center">
               <img className="h-[9rem]" src={produto.imagem_path} />
             </div>

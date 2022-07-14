@@ -1,30 +1,27 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { changeUser } from '../reducers/login/userSlice';
+import { baseURL, timeout, headers } from "../api/api_config.js";
 
 function Login() {
     const axios = require("axios").default;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const instance = axios.create({
-        baseURL: "http://127.0.0.1:8000",
-        timeout: 3000,
-        headers: {
-            "Api-Secret": "4f3c6a0b-522e-442e-94f7-3d413956050e",
-            "Access-Control-Allow-Origin": "http://localhost:8000",
-            "Access-Control-Allow-Methods": "PUT, POST, DELETE, GET, OPTIONS",
-            "Access-Control-Allow-Headers": "Accept, Authorization, Content-Type",
-        },
+        "baseURL": baseURL,
+        "timeout": timeout,
+        "headers": headers
     });
 
     const [dadosLogin, setDadosLogin] = useState({
-        "_token": "",
         "email": "",
         "senha": "",
 
     });
-    
-    window.csrf_token = "d";
-    
+
     function handleChange(event) {
         let key = event.target.id;
         let value = event.target.value;
@@ -36,23 +33,49 @@ function Login() {
 
     }
 
-    const [validationMessage, setValidationMessage] = useState();
+    const [validationMessage, setValidationMessage] = useState({});
 
     function handleSubmit(event) {
         event.preventDefault();
 
         instance.post("/api/login", dadosLogin)
             .then((response) => {
-                window.localStorage.setItem("token", response.data.access_token);
-                setValidationMessage({ "mensagem": response.data.mensagem });
+                let payload = "";
+                if (response.data.error_code == 1) {
+                    payload = {
+                        "token": response.data.token,
+                        "cliente_id": response.data.cliente_id,
+                        "user": response.data.nome
+                    }
+
+                    dispatch(changeUser(payload));
+                    navigate("../dashboard", { replace: true });
+                }
+
+                let error_type = response.data.error_type;
+                
+                switch (error_type) {
+                    case "email":
+                        setValidationMessage({
+                            "email_error": response.data.mensagem
+                        }, []);
+                        break;
+
+                    case "senha":
+                        setValidationMessage({
+                            "senha_error": response.data.mensagem
+                        }, []);
+                        break;
+                }
+            
 
             })
             .catch((error) => {
                 console.log(error);
-                setValidationMessage({ "mensagem": error.response.data.mensagem });
+                setValidationMessage({ "mensagem": error.data.mensagem });
+                
+                console.log(error);
             }, [])
-
-
     }
 
     return (
@@ -67,12 +90,18 @@ function Login() {
                     <p className='mr-3 mb-3' ><Link to="forgot_password"> Esqueci minha senha </Link> </p>
                     <p className="mb-9" ><Link to="forgot_user"> Esqueci meu usuario </Link> </p>
                 </div>
-                <button className="bg-blue-300 w-[100%] rounded text-white font-bold h-10 hover:bg-indigo-300 hover:scale-105 mb-[3rem]" type="submit"> Login </button>
+                <button className="bg-red-500 w-[100%] rounded text-white font-bold h-10 hover:bg-indigo-300 hover:scale-105 mb-[3rem]" type="submit"> Login </button>
             </form>
-            {validationMessage &&
-                <div className="container flex flex-row items-center bg-yellow-100 font-bold w-[70%] items-center justify-center h-[3rem] rounded">
-                    <span className='text-center'> {validationMessage.mensagem} </span>
-                </div>}
+            {validationMessage.email_error &&
+                <div className="container bg-yellow-100 flex flex-row items-center font-bold w-[70%] items-center justify-center h-[3rem] rounded">
+                    <span className='text-center text-black-100'> {validationMessage.email_error} </span>
+                </div>
+            }
+            {validationMessage.senha_error &&
+                <div className="container bg-red-100 flex flex-row items-center font-bold w-[70%] items-center justify-center h-[3rem] rounded">
+                    <span className='text-center text-red-500'> {validationMessage.senha_error} </span>
+                </div>
+            }
         </div>
     )
 }
