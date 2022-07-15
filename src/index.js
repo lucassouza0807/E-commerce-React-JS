@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { PersistGate } from 'redux-persist/integration/react';
 //components
-import Body from './components/Main.js';
+import HomePage from './components/HomePage.js';
 import Login from './components/Login.js';
 import Cadastro from './components/Cadastro.js';
 import Header from './components/Header.js';
@@ -25,7 +25,7 @@ function App() {
         <PersistGate loading={null} persistor={persirtor}>
           <Header />
           <Routes>
-            <Route exact path="/" element={<Body />} />
+            <Route exact path="/" element={<HomePage />} />
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/hardware/produtos" element={<Produtos />} />
             <Route element={<ProtectLoginPage />}>

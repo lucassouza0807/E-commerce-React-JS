@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/app.css";
 
-function Body() {
+function HomePage() {
     return (
         <div>
             <div className="container flex flex-row bg-red-500 mt-3 h-[3rem] pl-[25px] items-center font-bold text-lg">
@@ -36,4 +36,4 @@ function Body() {
     )
 }
 
-export default Body;
+export default HomePage;
