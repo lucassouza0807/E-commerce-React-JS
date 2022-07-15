@@ -14,9 +14,7 @@ import { Provider } from 'react-redux/es/exports.js';
 import { store, persirtor } from './reducers/login/store.js';
 //rotas protegidas
 import AuthMiddleware from './utils/AuthMiddleware.js';
-// Prevenir o usuario de acessar a pagina de login de novo depois de logado!
-import ProtectLoginPage from './utils/ProtectLoginPage.js';
-
+import ProtectLoginPage from './utils/ProtectLoginPage.js';// --> Prevenir que o usuário acesse a página de login de novo depois de logado
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function App() {
