@@ -15,6 +15,7 @@ import { store, persirtor } from './reducers/login/store.js';
 //rotas protegidas
 import AuthMiddleware from './utils/AuthMiddleware.js';
 import ProtectLoginPage from './utils/ProtectLoginPage.js';// --> Prevenir que o usuário acesse a página de login de novo depois de logado
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function App() {
