@@ -56,12 +56,12 @@ function Header() {
                     </div>
                 }
             </div>
-            <div className="flex flex-row items-center justify-center bg-red-500 mr-[5px] text-white font-bold p-1">
+            <div className="flex flex-row w-[100%] items-center justify-center bg-red-500 mr-[5px] text-white font-bold p-1">
                 <Link to="/hardware/produtos"><h1 className="mr-[3rem]" > Todos os hardwares </h1></Link>
                 <Link to="/hardware/placa-de-video"><h1 className="mr-[3rem]"> Placas de video </h1></Link>
                 <Link to="/hardware/processadores"><h1 className="mr-[3rem]"> Processadores </h1></Link>
             </div>
-        </div >
+        </div>
     )
 }
 

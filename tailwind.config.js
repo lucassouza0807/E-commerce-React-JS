@@ -5,6 +5,7 @@ module.exports = {
     "./src/components/Cadastro.js",
     "./src/components/Produtos.js",
     "./src/components/Header.js",
+    "./src/components/Main.js",
     "./src/index.js",
   
   ],

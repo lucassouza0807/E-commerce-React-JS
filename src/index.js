@@ -13,7 +13,7 @@ import Produtos from "./components/Produtos.js";
 import { Provider } from 'react-redux/es/exports.js';
 import { store, persirtor } from './reducers/login/store.js';
 //rotas protegidas
-import ProtectedRoute from './utils/ProtectedRoute.js';
+import AuthMiddleware from './utils/AuthMiddleware.js';
 // Prevenir o usuario de acessar a pagina de login de novo depois de logado!
 import ProtectLoginPage from './utils/ProtectLoginPage.js';
 
@@ -32,7 +32,7 @@ function App() {
             <Route element={<ProtectLoginPage />}>
               <Route path="/login" element={<Login />} exact />
             </Route>
-            <Route element={<ProtectedRoute />}>
+            <Route element={<AuthMiddleware />}>
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
           </Routes>

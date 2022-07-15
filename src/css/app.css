@@ -103,6 +103,11 @@ header li {
   background-color: red;
 }
 
+.gamer-carroussel {
+  overflow: hidden;
+  background-color: aqua;
+}
+
 
 input:-webkit-autofill {
   border: 3px solid blue;
