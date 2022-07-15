@@ -1,4 +1,4 @@
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate, Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../reducers/login/userSlice";
 import { useEffect } from "react";
@@ -8,15 +8,13 @@ function ProtectLoginPage() {
     let isLogged = state.isLogged;
     let navigate = useNavigate();
 
-    useEffect(() => {
-        if(isLogged === true) {
-            navigate("../dashboard");
-        }
-    }, [isLogged])
 
-    return (
-        <Outlet />
-    )
+    if (isLogged === false) {
+        return <Outlet />
+    }
+
+    return <Navigate to="../dashboard" replace={true}/>
+
 }
 
 export default ProtectLoginPage;

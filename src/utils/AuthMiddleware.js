@@ -1,4 +1,4 @@
-import { Outlet, Navigate} from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../reducers/login/userSlice";
 
@@ -7,12 +7,12 @@ function AuthMiddleware() {
 
     let isLogged = state.isLogged;
 
-    if(isLogged === true) {
+    if (isLogged === true) {
         return <Outlet />
 
-    } else if(isLogged === false) { 
-        return <Navigate to="../login" replace={true} />
     }
+
+    return <Navigate to="../login" replace={true} />
 }
 
 export default AuthMiddleware;
